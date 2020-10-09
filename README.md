@@ -30,9 +30,14 @@ $ curl http://gmapi.azurewebsites.net/getVehicleInfoService \
 
 Your tasks are as follows:
 
-+ Implement the Telematic API specification using any frameworks or libraries as necessary
-+ Provide tests for your API implementation
-+ Write your code to be well structured and documented
++ Implement the Telematic API specification using any frameworks or libraries as necessary.
++ Write your code to be well structured.
++ Design your API and code to be extensible. Imagine how the API could be expanded and what it would look like. For example, what if the Telematic API begins to expose the Tesla API which is quite different from the GM API?
++ Cleanly handle inconsistent data from GM's API. For example, what should we do when there is typo in a `getSecurityStatus` `location.value`?
++ Provide tests for your API implementation.
++ Add logging in order to trace through request flows and easily debug errors. [if time permits]
++ Document your code. [if time permits]
+
 
 ## The GM API
 
