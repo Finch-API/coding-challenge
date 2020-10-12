@@ -30,19 +30,18 @@ $ curl http://gmapi.azurewebsites.net/getVehicleInfoService \
 
 Your tasks are as follows:
 
-- Design the Telematic API to expose the GM API. The design should be extensible. 
-  - Imagine how the API can be expanded and what it will look like.
-  - What will happen when the Telematic API begins to expose Tesla's API, which is quite different to GM's.
+- Design the Telematic API to expose the GM API. The design should be extensible. What will happen when the Telematic API begins to expose Tesla's API, which is quite different to GM's.
 - Implement the Telematic API of your specification using any frameworks or libraries as necessary.
 - Write your code to be well structured.
-- Cleanly handle inconsistent data from GM's API. Keep in mind that GM's API is flaky, think about how to handle -
+- Cleanly handle inconsistent data from GM's API. Keep in mind GM's API is flaky, think about how to handle-
   - dropped connections
   - `5xx` and `429` errors from GM.
   - inconsistent data. What happens if GM returns typos in a data type?
   - anything else that can go wrong. How do we handle these issues while maintaining the best possible developer experiece?
-- Provide tests for your API implementation.
-- [if time permits] Add request flow logging. An API call to a production grade server will go through many middleware and methods, how can we leverage logging in order to trace through the lifecycle of a request?
-- [if time permits] Document your code.
+- Provide tests for your API implementation. Add automated testing that will allow you to move fast but safely as you expand the Telematic API.
+- An API call to a production grade server will go through many middleware and methods, add logging to trace through the lifecycle of a request.
+- Provide documentation for the users of Telematic API to integrate as fast as possible.
+- Add a readme with instructions to setup your server locally.
 
 **Note**: Our test (GM API) server will not return all possible error scenarios. However, our test suite will simulate API flakiness that your server (Telematic API) should be able to handle.
 
