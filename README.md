@@ -30,14 +30,21 @@ $ curl http://gmapi.azurewebsites.net/getVehicleInfoService \
 
 Your tasks are as follows:
 
-+ Implement the Telematic API specification using any frameworks or libraries as necessary.
-+ Write your code to be well structured.
-+ Design your API and code to be extensible. Imagine how the API could be expanded and what it would look like. For example, what if the Telematic API begins to expose the Tesla API which is quite different from the GM API?
-+ Cleanly handle inconsistent data from GM's API. For example, what should we do when there is typo in a `getSecurityStatus` `location.value`?
-+ Provide tests for your API implementation.
-+ Add logging in order to trace through request flows and easily debug errors. [if time permits]
-+ Document your code. [if time permits]
+- Design the Telematic API to expose the GM API. The design should be extensible. 
+  - Imagine how the API can be expanded and what it will look like.
+  - What will happen when the Telematic API begins to expose Tesla's API, which is quite different to GM's.
+- Implement the Telematic API of your specification using any frameworks or libraries as necessary.
+- Write your code to be well structured.
+- Cleanly handle inconsistent data from GM's API. Keep in mind that GM's API is flaky, think about how to handle -
+  - dropped connections
+  - `5xx` and `429` errors from GM.
+  - inconsistent data. What happens if GM returns typos in a data type?
+  - anything else that can go wrong. How do we handle these issues while maintaining the best possible developer experiece?
+- Provide tests for your API implementation.
+- [if time permits] Add request flow logging. An API call to a production grade server will go through many middleware and methods, how can we leverage logging in order to trace through the lifecycle of a request?
+- [if time permits] Document your code.
 
+**Note**: Our test (GM API) server will not return all possible error scenarios. However, our test suite will simulate API flakiness that your server (Telematic API) should be able to handle.
 
 ## The GM API
 
@@ -219,106 +226,4 @@ Content-Type: application/json
 ```
 
 ## The Telematic API Spec
-
-### Vehicle Info
-
-**Request:**
-
-```
-GET /vehicles/:id
-```
-
-**Response:**
-
-```
-{
-  "vin": "1213231",
-  "color": "Metallic Silver",
-  "doorCount": 4,
-  "driveTrain": "v8"
-}
-```
-
-### Security
-
-**Request:**
-
-```
-GET /vehicles/:id/doors
-```
-
-**Response:**
-
-```
-[
-  {
-    "location": "frontLeft",
-    "locked": true
-  },
-  {
-    "location": "frontRight",
-    "locked": true
-  },
-  {
-    "location": "backLeft",
-    "locked": true
-  },
-  {
-    "location": "backRight",
-    "locked": false
-  }
-]
-```
-
-### Fuel Range
-
-**Request:**
-
-```
-GET /vehicles/:id/fuel
-```
-
-**Response:**
-
-```
-{
-  "percent": 30.2
-}
-```
-
-### Battery Range
-
-**Request:**
-
-```
-GET /vehicles/:id/battery
-```
-
-**Response:**
-
-```
-{
-  "percent": 50.3
-}
-```
-
-### Start/Stop Engine
-
-**Request:**
-
-```
-POST /vehicles/:id/engine
-Content-Type: application/json
-
-{
-  "action": "START|STOP"
-}
-```
-
-**Response:**
-
-```
-{
-  "status": "success|error"
-}
-```
+Specify and implement the Telematic API to expose the GM API described above.
